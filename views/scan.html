@@ -1,0 +1,34 @@
+{% extends 'base/main_base.html' %}
+
+{% block title %}Scan Library{% endblock %}
+
+{% block content %}
+<div class='content-body'>
+  <h1>Scan</h1>
+  {% if dir_error %}
+    <div class="alert alert-danger">
+      The path specified as <code>music_dir</code> could not be found. You need to change it in the config.js file.
+    </div>
+  {% else %}
+    <p>Currently your music dir is <code>{{dir}}</code> and contains <code>{{num_items}}</code> items.</p>
+    <a class='btn btn-primary' id='start_scan'>Start Scan</a>
+    <a class='btn btn-default' id='start_scan_hard'>Hard Scan (recheck all songs)</a>
+    <div class="progress progress-striped active">
+      <div class="progress-bar" role="progressbar">
+      </div>
+    </div>
+    <p class="scan_details"></p>
+  {% endif %}
+</div>
+{% endblock %}
+{% block scripts %}
+<script type="text/javascript">
+  head.js(
+    "/static/js/libs/underscore-min.js",
+    "/static/js/libs/backbone-min.js",
+    "/static/js/libs/backbone.marionette.min.js",
+    "/static/js/libs/socket.io.min.js",
+    "/static/js/scan.js"
+    );
+</script>
+{% endblock %}
